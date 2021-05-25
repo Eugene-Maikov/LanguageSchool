@@ -54,15 +54,7 @@ namespace LanguageSchool
 
         }
 
-        private void Button_Initialized(object sender, EventArgs e)
-        {
-            Button BtnRed = (Button)sender;
-            if (BtnRed != null)
-            {
-                BtnRed.Uid = Convert.ToString(i);
-            }
-
-        }
+        
 
         private void StackPanel_Initialized(object sender, EventArgs e)
         {
@@ -73,6 +65,96 @@ namespace LanguageSchool
                 if (S.Discount != 0)
                 {
                     SP.Background = new SolidColorBrush(Color.FromRgb(231, 250, 191));
+                }
+            }
+
+        }
+
+        //Инициализация кнопок
+        private void Button_Initialized(object sender, EventArgs e)
+        {
+            Button BtnRed = (Button)sender;
+            if (BtnRed != null)
+            {
+                BtnRed.Uid = Convert.ToString(i);
+            }
+
+        }
+        private void Button_Initialized_1(object sender, EventArgs e)
+        {
+            Button BtnDel = (Button)sender;
+            if (BtnDel != null)
+            {
+                BtnDel.Uid = Convert.ToString(i);
+            }
+        }
+        private void Button_Initialized_2(object sender, EventArgs e)
+        {
+            Button BtnAdd = (Button)sender;
+            if (BtnAdd != null)
+            {
+                BtnAdd.Uid = Convert.ToString(i);
+            }
+        }
+
+
+        //Проверка кнопок
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button BtnRed = (Button)sender;
+            int ind = Convert.ToInt32(BtnRed.Uid);
+            Service S = ServiswList[ind];
+            MessageBox.Show(S.Title);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Button BtnRed = (Button)sender;
+            int ind = Convert.ToInt32(BtnRed.Uid);
+            Service S = ServiswList[ind];
+            MessageBox.Show(S.Title);
+        }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Button BtnRed = (Button)sender;
+            int ind = Convert.ToInt32(BtnRed.Uid);
+            Service S = ServiswList[ind];
+            MessageBox.Show(S.Title);
+        }
+
+        private void TextBlock_Initialized_1(object sender, EventArgs e)
+        {
+            if (i < ServiswList.Count)
+            {
+                TextBlock Price = (TextBlock)sender;
+                Service S = ServiswList[i];
+                Price.Text = Convert.ToString(S.Cost);
+                //  i++;
+            }
+        }
+
+        private void TextBlock_Initialized_2(object sender, EventArgs e)
+        {
+            if (i < ServiswList.Count)
+            {
+                TextBlock Duration = (TextBlock)sender;
+                Service S = ServiswList[i];
+                Duration.Text =Convert.ToString(S.DurationInSeconds);
+                //  i++;
+            }
+        }
+
+        private void TextBlock_Initialized_3(object sender, EventArgs e)
+        {
+            if (i < ServiswList.Count)
+            {
+                TextBlock Disc = (TextBlock)sender;
+                Service S = ServiswList[i];
+                Disc.Text = Convert.ToString(S.Discount);
+                //  i++;
+                if (i < ServiswList.Count)
+                {
+                     dick.Visibility = Visibility.Visible;
                 }
             }
 
