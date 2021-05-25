@@ -23,6 +23,7 @@ namespace LanguageSchool
         public MainWindow()
         {
             InitializeComponent();
+            Base.mE = new MaikovEntities();
             MainFrame.Content = new Admin();
         }
     }
