@@ -152,7 +152,6 @@ namespace LanguageSchool
                 Service S = ServiswList[i];
                 Disc.Text = Convert.ToString(S.Discount);
                 //  i++;
-                
             }
 
         }
