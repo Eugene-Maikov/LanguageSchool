@@ -11,30 +11,30 @@
     <Grid Background="#fff">
         <ScrollViewer>
             <StackPanel>
-                <DataGrid Name="DGServises" AutoGenerateColumns="False" HorizontalAlignment="Left" IsReadOnly="False" CanUserAddRows="False">
+                <DataGrid Name="DGServises" AutoGenerateColumns="False" HorizontalAlignment="Left" IsReadOnly="False" CanUserAddRows="False" FontSize="16px">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Initialized="StackPanel_Initialized">
-                                        <MediaElement Width="100" Height="100" Initialized="MediaElement_Initialized"/>
+                                        <MediaElement Width="150" Height="150" Initialized="MediaElement_Initialized" Margin="0 0 15px 0"/>
                                         <StackPanel Orientation="Vertical">
                                             <StackPanel>
                                                 <TextBlock Initialized="TextBlock_Initialized"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Initialized="TextBlock_Initialized_1"/>
-                                                <TextBlock> Рублей за </TextBlock>
-                                                <TextBlock Initialized="TextBlock_Initialized_2"/>
-                                                <TextBlock> Минут</TextBlock>
+                                                <TextBlock Initialized="TextBlock_Initialized_Cost" Margin="0 0 5px 0"/>
+                                                <TextBlock Margin="0 0 5px 0"> Рублей за </TextBlock>
+                                                <TextBlock Initialized="TextBlock_Initialized_Duration" Margin="0 0 5px 0"/>
+                                                <TextBlock> Секунд</TextBlock>
                                             </StackPanel>
                                             <StackPanel>
-                                                <TextBlock Name="dick"  Initialized="TextBlock_Initialized_3" Visibility="Hidden"/>
+                                                <TextBlock Initialized="TextBlock_Initialized_Discount"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button Content="Редактировать" Initialized="Button_Initialized" Click="Button_Click"/>
-                                                <Button Content="Удалить" Initialized="Button_Initialized_1" Click="Button_Click_1"/>
-                                                <Button Content="Новый заказ" Initialized="Button_Initialized_2" Click="Button_Click_2"/>
+                                                <Button Margin="0 30px 15px 0" Width="130px" Content="Редактировать" Initialized="Button_Initialized_Red" Click="Button_Click"/>
+                                                <Button Margin="0 30px 15px 0" Width="130px" Content="Удалить" Initialized="Button_Initialized_Del" Click="Button_Click_1"/>
+                                                <Button Margin="0 30px 15px 0" Width="130px" Content="Новый заказ" Initialized="Button_Initialized_Add" Click="Button_Click_2"/>
                                             </StackPanel>
                                         </StackPanel>
                                     </StackPanel>

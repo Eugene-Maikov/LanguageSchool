@@ -71,7 +71,7 @@ namespace LanguageSchool
         }
 
         //Инициализация кнопок
-        private void Button_Initialized(object sender, EventArgs e)
+        private void Button_Initialized_Red(object sender, EventArgs e)
         {
             Button BtnRed = (Button)sender;
             if (BtnRed != null)
@@ -80,7 +80,7 @@ namespace LanguageSchool
             }
 
         }
-        private void Button_Initialized_1(object sender, EventArgs e)
+        private void Button_Initialized_Del(object sender, EventArgs e)
         {
             Button BtnDel = (Button)sender;
             if (BtnDel != null)
@@ -88,7 +88,7 @@ namespace LanguageSchool
                 BtnDel.Uid = Convert.ToString(i);
             }
         }
-        private void Button_Initialized_2(object sender, EventArgs e)
+        private void Button_Initialized_Add(object sender, EventArgs e)
         {
             Button BtnAdd = (Button)sender;
             if (BtnAdd != null)
@@ -122,7 +122,7 @@ namespace LanguageSchool
             MessageBox.Show(S.Title);
         }
 
-        private void TextBlock_Initialized_1(object sender, EventArgs e)
+        private void TextBlock_Initialized_Cost(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
             {
@@ -133,7 +133,7 @@ namespace LanguageSchool
             }
         }
 
-        private void TextBlock_Initialized_2(object sender, EventArgs e)
+        private void TextBlock_Initialized_Duration(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
             {
@@ -144,7 +144,7 @@ namespace LanguageSchool
             }
         }
 
-        private void TextBlock_Initialized_3(object sender, EventArgs e)
+        private void TextBlock_Initialized_Discount(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
             {
@@ -152,10 +152,7 @@ namespace LanguageSchool
                 Service S = ServiswList[i];
                 Disc.Text = Convert.ToString(S.Discount);
                 //  i++;
-                if (i < ServiswList.Count)
-                {
-                     dick.Visibility = Visibility.Visible;
-                }
+                
             }
 
         }
