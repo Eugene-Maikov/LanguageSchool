@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -97,31 +98,6 @@ namespace LanguageSchool
             }
         }
 
-
-        //Проверка кнопок
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Button BtnRed = (Button)sender;
-            int ind = Convert.ToInt32(BtnRed.Uid);
-            Service S = ServiswList[ind];
-            MessageBox.Show(S.Title);
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Button BtnRed = (Button)sender;
-            int ind = Convert.ToInt32(BtnRed.Uid);
-            Service S = ServiswList[ind];
-            MessageBox.Show(S.Title);
-        }
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            Button BtnRed = (Button)sender;
-            int ind = Convert.ToInt32(BtnRed.Uid);
-            Service S = ServiswList[ind];
-            MessageBox.Show(S.Title);
-        }
-
         private void TextBlock_Initialized_Cost(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
@@ -155,5 +131,81 @@ namespace LanguageSchool
             }
 
         }
+
+
+
+        Service S1;
+        private void BReg_Click(object sender, RoutedEventArgs e)
+        {
+            Button BEdit = (Button)sender;
+            int ind = Int32.Parse(BEdit.Uid);
+            S1 = ServiswList[ind];
+            MSP.Visibility = Visibility.Collapsed;
+            SPRed.Visibility = Visibility.Visible;
+
+            TBlRId.Text = Convert.ToString(S1.ID);
+            TBRTitle.Text = S1.Title;
+            TBRCost.Text = Convert.ToString(S1.Cost);
+            TBDurationInSeconds.Text = Convert.ToString(S1.DurationInSeconds);
+            TBDiscount.Text = Convert.ToString(S1.Discount);
+            TBDescription.Text = Convert.ToString(S1.Description);
+            TBRImage.Text = Convert.ToString(S1.MainImagePath);
+
+        }
+
+        private void BABack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Admin());
+            SPRed.Visibility = Visibility.Collapsed;
+            MSP.Visibility = Visibility.Visible;
+        }
+
+        private void BRReg_Click(object sender, RoutedEventArgs e)
+        {
+            S1.Title = TBRTitle.Text;
+            S1.Cost = Convert.ToDecimal(TBRCost.Text);
+            S1.DurationInSeconds = Convert.ToInt32(TBDurationInSeconds.Text);
+            S1.Discount = Convert.ToInt32(TBDiscount.Text);
+            S1.Description = TBDescription.Text;
+            S1.MainImagePath = TBRImage.Text;
+            Base.mE.SaveChanges();
+            MessageBox.Show("Запись добавлена");
+        }
+
+        private void RImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog OFD = new OpenFileDialog();
+            OFD.ShowDialog();
+            string path = OFD.FileName;
+            TBRImage.Text = path;
+        }
+
+        private void BDel_Click(object sender, RoutedEventArgs e)
+        {
+            Button BtnDel = (Button)sender;
+            int ind = Convert.ToInt32(BtnDel.Uid);
+            Service S = ServiswList[ind];
+            Base.mE.Service.Remove(S);
+            MessageBox.Show("Удалена");
+            Base.mE.SaveChanges();
+            NavigationService.Navigate(new Admin());
+        }
+
+        private void BAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Button BtnAdd = (Button)sender;
+            int ind = Int32.Parse(BtnAdd.Uid);
+            S1 = ServiswList[ind];
+            BAdd.Visibility = Visibility.Collapsed;
+            AddNote.Visibility = Visibility.Visible;
+
+            S1.Title = TBATitle.Text;
+            S1.Cost = Convert.ToInt32(TBACost.Text);
+            // и тд
+            Base.mE.Service.Add(S1);
+            Base.mE.SaveChanges();
+        }
+
+
     }
 }

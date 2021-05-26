@@ -10,40 +10,84 @@
 
     <Grid Background="#fff">
         <ScrollViewer>
-            <StackPanel>
-                <DataGrid Name="DGServises" AutoGenerateColumns="False" HorizontalAlignment="Left" IsReadOnly="False" CanUserAddRows="False" FontSize="16px">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Initialized="StackPanel_Initialized">
-                                        <MediaElement Width="150" Height="150" Initialized="MediaElement_Initialized" Margin="0 0 15px 0"/>
-                                        <StackPanel Orientation="Vertical">
-                                            <StackPanel>
-                                                <TextBlock Initialized="TextBlock_Initialized"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Initialized="TextBlock_Initialized_Cost" Margin="0 0 5px 0"/>
-                                                <TextBlock Margin="0 0 5px 0"> Рублей за </TextBlock>
-                                                <TextBlock Initialized="TextBlock_Initialized_Duration" Margin="0 0 5px 0"/>
-                                                <TextBlock> Секунд</TextBlock>
-                                            </StackPanel>
-                                            <StackPanel>
-                                                <TextBlock Initialized="TextBlock_Initialized_Discount"/>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button Margin="0 30px 15px 0" Width="130px" Content="Редактировать" Initialized="Button_Initialized_Red" Click="Button_Click"/>
-                                                <Button Margin="0 30px 15px 0" Width="130px" Content="Удалить" Initialized="Button_Initialized_Del" Click="Button_Click_1"/>
-                                                <Button Margin="0 30px 15px 0" Width="130px" Content="Новый заказ" Initialized="Button_Initialized_Add" Click="Button_Click_2"/>
+            <StackPanel Name="MSP" Visibility="Visible">
+                
+                <StackPanel>
+                    <Image Source="/images/school_logo.png" Width="30px" HorizontalAlignment="Left" Margin="15px"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <DataGrid Name="DGServises" AutoGenerateColumns="False" HorizontalAlignment="Left" IsReadOnly="False" CanUserAddRows="False" FontSize="16px">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Initialized="StackPanel_Initialized">
+                                            <MediaElement Width="150" Height="150" Initialized="MediaElement_Initialized" Margin="0 0 15px 0"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel>
+                                                    <TextBlock Initialized="TextBlock_Initialized"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Initialized="TextBlock_Initialized_Cost" Margin="0 0 5px 0"/>
+                                                    <TextBlock Margin="0 0 5px 0"> Рублей за </TextBlock>
+                                                    <TextBlock Initialized="TextBlock_Initialized_Duration" Margin="0 0 5px 0"/>
+                                                    <TextBlock> Секунд</TextBlock>
+                                                </StackPanel>
+                                                <StackPanel>
+                                                    <TextBlock Initialized="TextBlock_Initialized_Discount"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Margin="0 30px 15px 0" Width="130px" Name="BReg" Click="BReg_Click" Content="Редактировать" Initialized="Button_Initialized_Red" />
+                                                    <Button Margin="0 30px 15px 0" Width="130px" Name="BDel" Click="BDel_Click" Content="Удалить" Initialized="Button_Initialized_Del"/>
+                                                    <Button Margin="0 30px 15px 0" Width="130px" Content="Новый заказ" Initialized="Button_Initialized_Add"/>
+                                                </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Name="BAdd" Content="Добавить услугу"/>
+                    <StackPanel Name="AddNote"  Visibility="Collapsed">
+                        <Label FontSize="16px" Content="Введите название услуги"/>
+                        <TextBox Name="TBATitle"/>
+
+                        <Label FontSize="16px" Content="Введите стоимость"/>
+                        <TextBox Name="TBACost"/>
+                    </StackPanel>
+
+                </StackPanel>
+                
             </StackPanel>
         </ScrollViewer>
+        
+        <StackPanel Name="SPRed" Visibility="Collapsed" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Name="TBlRId"  Width="30px" HorizontalAlignment="Center" FontSize="16px"/>
+                <StackPanel>
+                    <Label FontSize="16px" Content="Введите название услуги"/>
+                    <TextBox Name="TBRTitle"/>
+                    <Label FontSize="16px" Content="Введите стоимость"/>
+                    <TextBox Name="TBRCost"/>
+                    <Label FontSize="16px" Content="Введите длительность"/>
+                    <TextBox Name="TBDurationInSeconds"/>
+                    <Label FontSize="16px" Content="Введите скидку"/>
+                    <TextBox Name="TBDiscount"/>
+                    <Label FontSize="16px" Content="Введите описание"/>
+                    <TextBox Name="TBDescription"/>
+                    <Label FontSize="16px" Content="Введите путь картинки"/>
+                    <TextBox Name="TBRImage"/>
+                    <Button Margin="15px" Width="130px" Name="RImage" Content="Добавить картинку" Click="RImage_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="15px" Width="130px" Name="BRReg" Content="Редактировать услугу" Click="BRReg_Click"/>
+                <Button Margin="15px" Width="130px" Name="BABack" Content="Назад" Click="BABack_Click"/>
+            </StackPanel>
+        </StackPanel>
+        
     </Grid>
 </Page>
