@@ -193,19 +193,44 @@ namespace LanguageSchool
 
         private void BAdd_Click(object sender, RoutedEventArgs e)
         {
-            Button BtnAdd = (Button)sender;
-            int ind = Int32.Parse(BtnAdd.Uid);
-            S1 = ServiswList[ind];
+            MSP.Visibility = Visibility.Collapsed;
             BAdd.Visibility = Visibility.Collapsed;
             AddNote.Visibility = Visibility.Visible;
-
-            S1.Title = TBATitle.Text;
-            S1.Cost = Convert.ToInt32(TBACost.Text);
-            // и тд
-            Base.mE.Service.Add(S1);
-            Base.mE.SaveChanges();
         }
 
+        private void BAddNote_Click(object sender, RoutedEventArgs e)
+        {
+            Service S = new Service();
+            S.Title = TBATitle.Text;
+            S.Cost = Convert.ToInt32(TBACost.Text);
+            S.DurationInSeconds = Convert.ToInt32(TBADurationInSeconds.Text);
+            S.Discount = Convert.ToInt32(TBADiscount.Text);
+            S.Description = TBADescription.Text;
+            S.MainImagePath = TBARImage.Text;
 
+            /*S1.DurationInSeconds = Convert.ToInt32(TBDurationInSeconds.Text);
+            S1.Discount = Convert.ToInt32(TBDiscount.Text);
+            S1.Description = TBDescription.Text;
+            S1.MainImagePath = TBRImage.Text;*/
+            // и тд
+            Base.mE.Service.Add(S);
+            Base.mE.SaveChanges();
+            MessageBox.Show("Запись добавлена");
+        }
+
+        private void BBackNote_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Admin());
+            AddNote.Visibility = Visibility.Collapsed;
+            MSP.Visibility = Visibility.Visible;
+        }
+
+        private void AddImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog OFD = new OpenFileDialog();
+            OFD.ShowDialog();
+            string path = OFD.FileName;
+            TBARImage.Text = path;
+        }
     }
 }

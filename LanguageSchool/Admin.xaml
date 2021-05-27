@@ -49,17 +49,8 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Name="BAdd" Content="Добавить услугу"/>
-                    <StackPanel Name="AddNote"  Visibility="Collapsed">
-                        <Label FontSize="16px" Content="Введите название услуги"/>
-                        <TextBox Name="TBATitle"/>
-
-                        <Label FontSize="16px" Content="Введите стоимость"/>
-                        <TextBox Name="TBACost"/>
-                    </StackPanel>
-
+                    <Button Name="BAdd" Content="Добавить услугу" Click="BAdd_Click"/>
                 </StackPanel>
-                
             </StackPanel>
         </ScrollViewer>
         
@@ -82,12 +73,29 @@
                     <Button Margin="15px" Width="130px" Name="RImage" Content="Добавить картинку" Click="RImage_Click"/>
                 </StackPanel>
             </StackPanel>
-
             <StackPanel Orientation="Horizontal">
                 <Button Margin="15px" Width="130px" Name="BRReg" Content="Редактировать услугу" Click="BRReg_Click"/>
                 <Button Margin="15px" Width="130px" Name="BABack" Content="Назад" Click="BABack_Click"/>
             </StackPanel>
         </StackPanel>
-        
+        <StackPanel Name="AddNote"  Visibility="Collapsed">
+            <Label FontSize="16px" Content="Введите название услуги"/>
+            <TextBox Name="TBATitle"/>
+            <Label FontSize="16px" Content="Введите стоимость"/>
+            <TextBox Name="TBACost"/>
+            <Label FontSize="16px" Content="Введите длительность"/>
+            <TextBox Name="TBADurationInSeconds"/>
+            <Label FontSize="16px" Content="Введите скидку"/>
+            <TextBox Name="TBADiscount"/>
+            <Label FontSize="16px" Content="Введите описание"/>
+            <TextBox Name="TBADescription"/>
+            <Label FontSize="16px" Content="Введите путь картинки"/>
+            <TextBox Name="TBARImage"/>
+            <Button Margin="15px" Width="130px" Name="AddImage" Content="Добавить картинку" Click="AddImage_Click"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="15px" Width="130px" Name="BAddNote" Content="Добавить запись" Click="BAddNote_Click"/>
+                <Button Margin="15px" Width="130px" Name="BBackNote" Content="Назад" Click="BBackNote_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
