@@ -297,19 +297,18 @@ namespace LanguageSchool
             }
         }
 
-        int index;
-        int indexServiceID;
         private void Zap_Click(object sender, RoutedEventArgs e)
         {
-            ClientService CS = new ClientService();
-            index = (int)CBPeople.SelectedValue;
-            indexServiceID = (int)TBAddOrderTitle.SelectedValue;
-            CS.ServiceID = Convert.ToInt32(indexServiceID);
-            CS.ClientID = Convert.ToInt32(index);
-            CS.StartTime = Convert.ToDateTime(TBAddOrderDuration.Text);
+            Service S = ServiswList[i];
+            int indexCombo = (int)CBPeople.SelectedValue;
 
-
-            Base.mE.ClientService.Add(CS);
+            ClientService obj = new ClientService()
+            {
+                ClientID = indexCombo,
+                ServiceID = S.ID,
+                StartTime = DT
+            };
+            Base.mE.ClientService.Add(obj);
             Base.mE.SaveChanges();
             MessageBox.Show("Запись добавлена");
         }
