@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,10 @@ namespace LanguageSchool
         {
             InitializeComponent();
             DGServises.ItemsSource = ServiswList;
+            CBPeople.ItemsSource = Base.mE.Client.ToList();
+            CBPeople.SelectedValuePath = "ID";
+            CBPeople.DisplayMemberPath = "People";
+
         }
 
         int i = -1;
@@ -98,13 +103,23 @@ namespace LanguageSchool
             }
         }
 
+        private void TextBlock_Initialized_Cost_dop(object sender, EventArgs e)
+        {
+            if (i < ServiswList.Count)
+            {
+                TextBlock Price = (TextBlock)sender;
+                Service S = ServiswList[i];
+                Price.Text = Convert.ToInt32(S.Cost) + "";
+                //  i++;
+            }
+        }
         private void TextBlock_Initialized_Cost(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
             {
                 TextBlock Price = (TextBlock)sender;
                 Service S = ServiswList[i];
-                Price.Text = Convert.ToString(S.Cost);
+                Price.Text = Convert.ToInt32(S.Cost)+"";
                 //  i++;
             }
         }
@@ -115,7 +130,8 @@ namespace LanguageSchool
             {
                 TextBlock Duration = (TextBlock)sender;
                 Service S = ServiswList[i];
-                Duration.Text =Convert.ToString(S.DurationInSeconds);
+                Duration.Text =Convert.ToString(S.DurationInSeconds/60 + " минут");
+
                 //  i++;
             }
         }
@@ -126,7 +142,7 @@ namespace LanguageSchool
             {
                 TextBlock Disc = (TextBlock)sender;
                 Service S = ServiswList[i];
-                Disc.Text = Convert.ToString(S.Discount);
+                Disc.Text = Convert.ToString(S.Discount *100 + "%");
                 //  i++;
             }
 
@@ -145,8 +161,8 @@ namespace LanguageSchool
 
             TBlRId.Text = Convert.ToString(S1.ID);
             TBRTitle.Text = S1.Title;
-            TBRCost.Text = Convert.ToString(S1.Cost);
-            TBDurationInSeconds.Text = Convert.ToString(S1.DurationInSeconds);
+            TBRCost.Text = Convert.ToInt32(S1.Cost) + "";
+            TBDurationInSeconds.Text = Convert.ToString(S1.DurationInSeconds / 60);
             TBDiscount.Text = Convert.ToString(S1.Discount);
             TBDescription.Text = Convert.ToString(S1.Description);
             TBRImage.Text = Convert.ToString(S1.MainImagePath);
@@ -208,11 +224,6 @@ namespace LanguageSchool
             S.Description = TBADescription.Text;
             S.MainImagePath = TBARImage.Text;
 
-            /*S1.DurationInSeconds = Convert.ToInt32(TBDurationInSeconds.Text);
-            S1.Discount = Convert.ToInt32(TBDiscount.Text);
-            S1.Description = TBDescription.Text;
-            S1.MainImagePath = TBRImage.Text;*/
-            // и тд
             Base.mE.Service.Add(S);
             Base.mE.SaveChanges();
             MessageBox.Show("Запись добавлена");
@@ -231,6 +242,77 @@ namespace LanguageSchool
             OFD.ShowDialog();
             string path = OFD.FileName;
             TBARImage.Text = path;
+        }
+
+        private void BAddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            MSP.Visibility = Visibility.Collapsed;
+            AddOrder.Visibility = Visibility.Visible;
+
+            Button BEdit = (Button)sender;
+            int ind = Int32.Parse(BEdit.Uid);
+            S1 = ServiswList[ind];
+            TBAddOrderTitle.Text = Convert.ToString(S1.Title);
+            TBAddOrderDuration.Text = Convert.ToString(S1.DurationInSeconds/60 + " минут");
+        }
+        private void BAddOrderBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Admin());
+            AddOrder.Visibility = Visibility.Collapsed;
+            MSP.Visibility = Visibility.Visible;
+        }
+
+        DateTime DT;
+        private void TBTime_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           
+            {
+                Regex r1 = new Regex("[0-1][0-9][0-5][0-9]");
+                Regex r2 = new Regex("2[0-3]:[0-5][0-9]");
+                /*string s = "";*/
+                if ((r1.IsMatch(TBTime.Text) || r2.IsMatch(TBTime.Text)) && TBTime.Text.Length == 5)
+                {
+                    MessageBox.Show(TBTime.Text);
+                    TimeSpan TS = TimeSpan.Parse(TBTime.Text);
+                    DT = Convert.ToDateTime(DP.SelectedDate);
+                    DT = DT.Add(TS);
+                    if (DT > DateTime.Now)
+                    {
+                        MessageBox.Show(DT + "");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Слишком поздно");
+                        Zap.IsEnabled = false;
+                    }
+                }
+                else
+                {
+                    if (TBTime.Text.Length >= 5)
+                    {
+                        MessageBox.Show("Время указано неверно");
+                        Zap.IsEnabled = false;
+                    }
+                }
+            }
+        }
+
+        int index;
+        int indexServiceID;
+        private void Zap_Click(object sender, RoutedEventArgs e)
+        {
+            ClientService CS = new ClientService();
+            index = (int)CBPeople.SelectedValue;
+            /*indexServiceID = (int)TBAddOrderTitle.SelectedValue;*/
+
+            /*CS.ServiceID = Convert.ToInt32(indexServiceID);*/
+            CS.ClientID = Convert.ToInt32(index);
+            CS.StartTime = Convert.ToDateTime(TBAddOrderDuration.Text);
+
+
+            Base.mE.ClientService.Add(CS);
+            Base.mE.SaveChanges();
+            MessageBox.Show("Запись добавлена");
         }
     }
 }

@@ -29,18 +29,18 @@
                                                     <TextBlock Initialized="TextBlock_Initialized"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
+                                                    <TextBlock TextDecorations="Strikethrough" Visibility="Collapsed" Initialized="TextBlock_Initialized_Cost_dop" Margin="0 0 5px 0"/>
                                                     <TextBlock Initialized="TextBlock_Initialized_Cost" Margin="0 0 5px 0"/>
-                                                    <TextBlock Margin="0 0 5px 0"> Рублей за </TextBlock>
+                                                    <TextBlock Margin="0 0 5px 0"> рублей за </TextBlock>
                                                     <TextBlock Initialized="TextBlock_Initialized_Duration" Margin="0 0 5px 0"/>
-                                                    <TextBlock> Секунд</TextBlock>
                                                 </StackPanel>
                                                 <StackPanel>
                                                     <TextBlock Initialized="TextBlock_Initialized_Discount"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Margin="0 30px 15px 0" Width="130px" Name="BReg" Click="BReg_Click" Content="Редактировать" Initialized="Button_Initialized_Red" />
-                                                    <Button Margin="0 30px 15px 0" Width="130px" Name="BDel" Click="BDel_Click" Content="Удалить" Initialized="Button_Initialized_Del"/>
-                                                    <Button Margin="0 30px 15px 0" Width="130px" Content="Новый заказ" Initialized="Button_Initialized_Add"/>
+                                                    <Button Margin="0 30px 15px 0"  Name="BReg" Click="BReg_Click" Content="Редактировать" Initialized="Button_Initialized_Red" Style="{StaticResource BtnStyle}"/>
+                                                    <Button Margin="0 30px 15px 0"  Name="BDel" Click="BDel_Click" Content="Удалить" Initialized="Button_Initialized_Del" Style="{StaticResource BtnStyle}"/>
+                                                    <Button Margin="0 30px 15px 0"  Name="BAddOrder" Click="BAddOrder_Click" Content="Новый заказ" Initialized="Button_Initialized_Add" Style="{StaticResource BtnStyle}"/>
                                                 </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
@@ -49,7 +49,7 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Name="BAdd" Content="Добавить услугу" Click="BAdd_Click"/>
+                    <Button Name="BAdd" Margin="15px" Width="130px" Content="Добавить услугу" Click="BAdd_Click" Style="{StaticResource BtnStyle}"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
@@ -70,12 +70,12 @@
                     <TextBox Name="TBDescription"/>
                     <Label FontSize="16px" Content="Введите путь картинки"/>
                     <TextBox Name="TBRImage"/>
-                    <Button Margin="15px" Width="130px" Name="RImage" Content="Добавить картинку" Click="RImage_Click"/>
+                    <Button Margin="15px" Width="130px" Name="RImage" Content="Добавить картинку" Click="RImage_Click" Style="{StaticResource BtnStyle}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Margin="15px" Width="130px" Name="BRReg" Content="Редактировать услугу" Click="BRReg_Click"/>
-                <Button Margin="15px" Width="130px" Name="BABack" Content="Назад" Click="BABack_Click"/>
+                <Button Margin="15px" Width="130px" Name="BRReg" Content="Редактировать услугу" Click="BRReg_Click" Style="{StaticResource BtnStyle}"/>
+                <Button Margin="15px" Width="130px" Name="BABack" Content="Назад" Click="BABack_Click" Style="{StaticResource BtnStyle}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Name="AddNote"  Visibility="Collapsed">
@@ -96,6 +96,17 @@
                 <Button Margin="15px" Width="130px" Name="BAddNote" Content="Добавить запись" Click="BAddNote_Click"/>
                 <Button Margin="15px" Width="130px" Name="BBackNote" Content="Назад" Click="BBackNote_Click"/>
             </StackPanel>
+        </StackPanel>
+        <StackPanel Name="AddOrder" Visibility="Collapsed">
+            <TextBlock Name="TBAddOrderTitle"/>
+            <TextBlock Name="TBAddOrderDuration"/>
+            
+            <DatePicker Name="DP"/>
+            <TextBox Name="TBTime" TextChanged="TBTime_TextChanged"/>
+            <ComboBox Name="CBPeople"/>
+            
+            <Button Name="Zap" Click="Zap_Click" Content="Записать"/>
+            <Button Name="BAddOrderBack" Click="BAddOrderBack_Click" Content="Назад"/>
         </StackPanel>
     </Grid>
 </Page>
