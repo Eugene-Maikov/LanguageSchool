@@ -303,9 +303,8 @@ namespace LanguageSchool
         {
             ClientService CS = new ClientService();
             index = (int)CBPeople.SelectedValue;
-            /*indexServiceID = (int)TBAddOrderTitle.SelectedValue;*/
-
-            /*CS.ServiceID = Convert.ToInt32(indexServiceID);*/
+            indexServiceID = (int)TBAddOrderTitle.SelectedValue;
+            CS.ServiceID = Convert.ToInt32(indexServiceID);
             CS.ClientID = Convert.ToInt32(index);
             CS.StartTime = Convert.ToDateTime(TBAddOrderDuration.Text);
 

@@ -93,20 +93,20 @@
             <TextBox Name="TBARImage"/>
             <Button Margin="15px" Width="130px" Name="AddImage" Content="Добавить картинку" Click="AddImage_Click"/>
             <StackPanel Orientation="Horizontal">
-                <Button Margin="15px" Width="130px" Name="BAddNote" Content="Добавить запись" Click="BAddNote_Click"/>
-                <Button Margin="15px" Width="130px" Name="BBackNote" Content="Назад" Click="BBackNote_Click"/>
+                <Button Margin="15px" Width="130px" Name="BAddNote" Content="Добавить запись" Click="BAddNote_Click" Style="{StaticResource BtnStyle}"/>
+                <Button Margin="15px" Width="130px" Name="BBackNote" Content="Назад" Click="BBackNote_Click" Style="{StaticResource BtnStyle}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Name="AddOrder" Visibility="Collapsed">
-            <TextBlock Name="TBAddOrderTitle"/>
-            <TextBlock Name="TBAddOrderDuration"/>
-            
-            <DatePicker Name="DP"/>
-            <TextBox Name="TBTime" TextChanged="TBTime_TextChanged"/>
-            <ComboBox Name="CBPeople"/>
-            
-            <Button Name="Zap" Click="Zap_Click" Content="Записать"/>
-            <Button Name="BAddOrderBack" Click="BAddOrderBack_Click" Content="Назад"/>
+            <TextBlock Margin="15px" FontSize="16px" Name="TBAddOrderTitle"/>
+            <TextBlock Margin="15px" FontSize="16px" Name="TBAddOrderDuration"/>
+
+            <DatePicker Margin="15px" FontSize="16px" Name="DP"/>
+            <TextBox Margin="15px" FontSize="16px" Name="TBTime" TextChanged="TBTime_TextChanged"/>
+            <ComboBox Margin="15px" FontSize="16px" Name="CBPeople"/>
+
+            <Button Name="Zap" Click="Zap_Click" Margin="15px" Content="Записать" Style="{StaticResource BtnStyle}"/>
+            <Button Name="BAddOrderBack" Margin="15px" Click="BAddOrderBack_Click" Content="Назад" Style="{StaticResource BtnStyle}"/>
         </StackPanel>
     </Grid>
 </Page>
