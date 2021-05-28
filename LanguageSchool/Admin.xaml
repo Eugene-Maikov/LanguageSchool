@@ -11,7 +11,6 @@
     <Grid Background="#fff">
         <ScrollViewer>
             <StackPanel Name="MSP" Visibility="Visible">
-                
                 <StackPanel>
                     <Image Source="/images/school_logo.png" Width="30px" HorizontalAlignment="Left" Margin="15px"/>
                 </StackPanel>
@@ -22,7 +21,7 @@
                             <Label Margin="15px 0 0 0" Content="Поиск" Style="{StaticResource LabelStyle}"/>
                             <TextBox Margin="15px 5px 15px 15px" Name="TBPoisk" SelectionChanged="TBPoisk_SelectionChanged" Style="{StaticResource BoxStyle}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
                             <Button Width="200" Margin="15px" Name="SortUp" Content="По возрастанию" Click="SortUp_Click" Style="{StaticResource BtnStyle}"/>
                             <Button Width="200" Name="SortDown" Content="По убыванию" Click="SortDown_Click" Style="{StaticResource BtnStyle}"/>
                         </StackPanel>
