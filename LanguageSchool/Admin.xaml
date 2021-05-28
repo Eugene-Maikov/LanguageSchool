@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LanguageSchool"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="800"
       Title="Admin">
 
     <Grid Background="#fff">
@@ -17,6 +17,28 @@
                 </StackPanel>
 
                 <StackPanel>
+                    <StackPanel>
+                        <StackPanel>
+                            <Label Margin="15px 0 0 0" Content="Поиск" Style="{StaticResource LabelStyle}"/>
+                            <TextBox Margin="15px 5px 15px 15px" Name="TBPoisk" SelectionChanged="TBPoisk_SelectionChanged" Style="{StaticResource BoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Button Width="200" Margin="15px" Name="SortUp" Content="По возрастанию" Click="SortUp_Click" Style="{StaticResource BtnStyle}"/>
+                            <Button Width="200" Name="SortDown" Content="По убыванию" Click="SortDown_Click" Style="{StaticResource BtnStyle}"/>
+                        </StackPanel>
+                        <StackPanel Margin="15px 0 15px 15px">
+                            <Label Content="Фильтр по скидке" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox FontFamily="Comic Sans MS"  Name="CBFilter" SelectionChanged="CBFilter_SelectionChanged">
+                                <ComboBoxItem Content="0-5"/>
+                                <ComboBoxItem Content="5-15"/>
+                                <ComboBoxItem Content="15-30"/>
+                                <ComboBoxItem Content="30-70"/>
+                                <ComboBoxItem Content="70-100"/>
+                                <ComboBoxItem Content="Все записи"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                    
                     <DataGrid Name="DGServises" AutoGenerateColumns="False" HorizontalAlignment="Left" IsReadOnly="False" CanUserAddRows="False" FontSize="16px">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
@@ -26,16 +48,16 @@
                                             <MediaElement Width="150" Height="150" Initialized="MediaElement_Initialized" Margin="0 0 15px 0"/>
                                             <StackPanel Orientation="Vertical">
                                                 <StackPanel>
-                                                    <TextBlock Initialized="TextBlock_Initialized"/>
+                                                    <TextBlock Initialized="TextBlock_Initialized" Style="{StaticResource TextStyle}"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock TextDecorations="Strikethrough" Visibility="Collapsed" Initialized="TextBlock_Initialized_Cost_dop" Margin="0 0 5px 0"/>
-                                                    <TextBlock Initialized="TextBlock_Initialized_Cost" Margin="0 0 5px 0"/>
-                                                    <TextBlock Margin="0 0 5px 0"> рублей за </TextBlock>
-                                                    <TextBlock Initialized="TextBlock_Initialized_Duration" Margin="0 0 5px 0"/>
+                                                    <TextBlock TextDecorations="Strikethrough" Visibility="Collapsed" Initialized="TextBlock_Initialized_Cost_dop" Margin="0 0 5px 0" Style="{StaticResource TextStyle}"/>
+                                                    <TextBlock Initialized="TextBlock_Initialized_Cost" Margin="0 0 5px 0" Style="{StaticResource TextStyle}"/>
+                                                    <TextBlock Margin="0 0 5px 0" Style="{StaticResource TextStyle}"> рублей за </TextBlock>
+                                                    <TextBlock Initialized="TextBlock_Initialized_Duration" Margin="0 0 5px 0" Style="{StaticResource TextStyle}"/>
                                                 </StackPanel>
                                                 <StackPanel>
-                                                    <TextBlock Initialized="TextBlock_Initialized_Discount"/>
+                                                    <TextBlock FontFamily="Comic Sans MS" Initialized="TextBlock_Initialized_Discount" Style="{StaticResource TextStyle}"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
                                                     <Button Margin="0 30px 15px 0"  Name="BReg" Click="BReg_Click" Content="Редактировать" Initialized="Button_Initialized_Red" Style="{StaticResource BtnStyle}"/>
@@ -49,61 +71,61 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Name="BAdd" Margin="15px" Width="130px" Content="Добавить услугу" Click="BAdd_Click" Style="{StaticResource BtnStyle}"/>
+                    <Button Name="BAdd" Margin="15px" Content="Добавить услугу" Click="BAdd_Click" Style="{StaticResource BtnStyle}"/>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
         
         <StackPanel Name="SPRed" Visibility="Collapsed" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Name="TBlRId"  Width="30px" HorizontalAlignment="Center" FontSize="16px"/>
+                <TextBlock Name="TBlRId"  Width="30px" HorizontalAlignment="Center" Style="{StaticResource TextStyle}"/>
                 <StackPanel>
-                    <Label FontSize="16px" Content="Введите название услуги"/>
-                    <TextBox Name="TBRTitle"/>
-                    <Label FontSize="16px" Content="Введите стоимость"/>
-                    <TextBox Name="TBRCost"/>
-                    <Label FontSize="16px" Content="Введите длительность"/>
-                    <TextBox Name="TBDurationInSeconds"/>
-                    <Label FontSize="16px" Content="Введите скидку"/>
-                    <TextBox Name="TBDiscount"/>
-                    <Label FontSize="16px" Content="Введите описание"/>
-                    <TextBox Name="TBDescription"/>
-                    <Label FontSize="16px" Content="Введите путь картинки"/>
-                    <TextBox Name="TBRImage"/>
-                    <Button Margin="15px" Width="130px" Name="RImage" Content="Добавить картинку" Click="RImage_Click" Style="{StaticResource BtnStyle}"/>
+                    <Label Content="Введите название услуги" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Name="TBRTitle" Style="{StaticResource BoxStyle}"/>
+                    <Label Content="Введите стоимость" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Name="TBRCost" Style="{StaticResource BoxStyle}"/>
+                    <Label Content="Введите длительность" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Name="TBDurationInSeconds" Style="{StaticResource BoxStyle}"/>
+                    <Label Content="Введите скидку" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Name="TBDiscount" Style="{StaticResource BoxStyle}"/>
+                    <Label Content="Введите описание" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Name="TBDescription" Style="{StaticResource BoxStyle}"/>
+                    <Label Content="Введите путь картинки" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Name="TBRImage" Style="{StaticResource BoxStyle}"/>
+                    <Button Margin="15px" Name="RImage" Content="Добавить картинку" Click="RImage_Click" Style="{StaticResource BtnStyle}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Margin="15px" Width="130px" Name="BRReg" Content="Редактировать услугу" Click="BRReg_Click" Style="{StaticResource BtnStyle}"/>
-                <Button Margin="15px" Width="130px" Name="BABack" Content="Назад" Click="BABack_Click" Style="{StaticResource BtnStyle}"/>
+                <Button Margin="15px" Name="BRReg" Content="Редактировать" Click="BRReg_Click" Style="{StaticResource BtnStyle}"/>
+                <Button Margin="15px" Name="BABack" Content="Назад" Click="BABack_Click" Style="{StaticResource BtnStyle}"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Name="AddNote"  Visibility="Collapsed">
-            <Label FontSize="16px" Content="Введите название услуги"/>
-            <TextBox Name="TBATitle"/>
-            <Label FontSize="16px" Content="Введите стоимость"/>
-            <TextBox Name="TBACost"/>
-            <Label FontSize="16px" Content="Введите длительность"/>
-            <TextBox Name="TBADurationInSeconds"/>
-            <Label FontSize="16px" Content="Введите скидку"/>
-            <TextBox Name="TBADiscount"/>
-            <Label FontSize="16px" Content="Введите описание"/>
-            <TextBox Name="TBADescription"/>
-            <Label FontSize="16px" Content="Введите путь картинки"/>
-            <TextBox Name="TBARImage"/>
-            <Button Margin="15px" Width="130px" Name="AddImage" Content="Добавить картинку" Click="AddImage_Click"/>
+        <StackPanel Width="500px" Name="AddNote"  Visibility="Collapsed">
+            <Label Content="Введите название услуги" Style="{StaticResource LabelStyle}"/>
+            <TextBox Name="TBATitle" Style="{StaticResource BoxStyle}"/>
+            <Label Content="Введите стоимость" Style="{StaticResource LabelStyle}"/>
+            <TextBox Name="TBACost" Style="{StaticResource BoxStyle}"/>
+            <Label Content="Введите длительность" Style="{StaticResource LabelStyle}"/>
+            <TextBox Name="TBADurationInSeconds" Style="{StaticResource BoxStyle}"/>
+            <Label Content="Введите скидку" Style="{StaticResource LabelStyle}"/>
+            <TextBox Name="TBADiscount" Style="{StaticResource BoxStyle}"/>
+            <Label Content="Введите описание" Style="{StaticResource LabelStyle}"/>
+            <TextBox Name="TBADescription" Style="{StaticResource BoxStyle}"/>
+            <Label Content="Введите путь картинки" Style="{StaticResource LabelStyle}"/>
+            <TextBox Name="TBARImage" Style="{StaticResource BoxStyle}"/>
+            <Button Margin="15px" Name="AddImage" Content="Добавить картинку" Click="AddImage_Click" Style="{StaticResource BtnStyle}"/>
             <StackPanel Orientation="Horizontal">
-                <Button Margin="15px" Width="130px" Name="BAddNote" Content="Добавить запись" Click="BAddNote_Click" Style="{StaticResource BtnStyle}"/>
-                <Button Margin="15px" Width="130px" Name="BBackNote" Content="Назад" Click="BBackNote_Click" Style="{StaticResource BtnStyle}"/>
+                <Button Margin="15px" Name="BAddNote" Content="Добавить запись" Click="BAddNote_Click" Style="{StaticResource BtnStyle}"/>
+                <Button Margin="15px" Name="BBackNote" Content="Назад" Click="BBackNote_Click" Style="{StaticResource BtnStyle}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Name="AddOrder" Visibility="Collapsed">
-            <TextBlock Margin="15px" FontSize="16px" Name="TBAddOrderTitle"/>
-            <TextBlock Margin="15px" FontSize="16px" Name="TBAddOrderDuration"/>
+            <TextBlock Margin="15px" Name="TBAddOrderTitle" Style="{StaticResource TextStyle}"/>
+            <TextBlock Margin="15px" Name="TBAddOrderDuration" Style="{StaticResource TextStyle}"/>
 
-            <DatePicker Margin="15px" FontSize="16px" Name="DP"/>
-            <TextBox Margin="15px" FontSize="16px" Name="TBTime" TextChanged="TBTime_TextChanged"/>
-            <ComboBox Margin="15px" FontSize="16px" Name="CBPeople"/>
+            <DatePicker FontFamily="Comic Sans MS" Margin="15px" FontSize="16px" Name="DP"/>
+            <TextBox Margin="15px" Name="TBTime" TextChanged="TBTime_TextChanged" Style="{StaticResource BoxStyle}"/>
+            <ComboBox FontFamily="Comic Sans MS" Margin="15px" FontSize="16px" Name="CBPeople"/>
 
             <Button Name="Zap" Click="Zap_Click" Margin="15px" Content="Записать" Style="{StaticResource BtnStyle}"/>
             <Button Name="BAddOrderBack" Margin="15px" Click="BAddOrderBack_Click" Content="Назад" Style="{StaticResource BtnStyle}"/>

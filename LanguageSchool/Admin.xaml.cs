@@ -22,10 +22,12 @@ namespace LanguageSchool
     /// </summary>
     public partial class Admin : Page
     {
-        List<Service> ServiswList = Base.mE.Service.ToList();
+        List<Service> ServiswList1 = Base.mE.Service.ToList();
+        List<Service> ServiswList = new List<Service>(); //Отрисовка
         public Admin()
         {
             InitializeComponent();
+            ServiswList = ServiswList1;
             DGServises.ItemsSource = ServiswList;
             CBPeople.ItemsSource = Base.mE.Client.ToList();
             CBPeople.SelectedValuePath = "ID";
@@ -33,8 +35,8 @@ namespace LanguageSchool
 
         }
 
+        //Инициализация картинки
         int i = -1;
-
         private void MediaElement_Initialized(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
@@ -48,6 +50,7 @@ namespace LanguageSchool
             }
         }
 
+        //Инициализация заголовка
         private void TextBlock_Initialized(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
@@ -60,8 +63,7 @@ namespace LanguageSchool
 
         }
 
-        
-
+        //Цвет фона ячейки с акциией
         private void StackPanel_Initialized(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
@@ -103,6 +105,8 @@ namespace LanguageSchool
             }
         }
 
+
+        //Инициализация стоимости для зачеркнутого
         private void TextBlock_Initialized_Cost_dop(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
@@ -113,43 +117,46 @@ namespace LanguageSchool
                 //  i++;
             }
         }
+
+        //Инициализация стоимости
         private void TextBlock_Initialized_Cost(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
             {
                 TextBlock Price = (TextBlock)sender;
                 Service S = ServiswList[i];
-                Price.Text = Convert.ToInt32(S.Cost)+"";
+                Price.Text = Convert.ToInt32(S.Cost) + "";
                 //  i++;
             }
         }
 
+        //Инициализация длительности
         private void TextBlock_Initialized_Duration(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
             {
                 TextBlock Duration = (TextBlock)sender;
                 Service S = ServiswList[i];
-                Duration.Text =Convert.ToString(S.DurationInSeconds/60 + " минут");
+                Duration.Text = Convert.ToString(S.DurationInSeconds / 60 + " минут");
 
                 //  i++;
             }
         }
 
+        //Инициализация скидки
         private void TextBlock_Initialized_Discount(object sender, EventArgs e)
         {
             if (i < ServiswList.Count)
             {
                 TextBlock Disc = (TextBlock)sender;
                 Service S = ServiswList[i];
-                Disc.Text = Convert.ToString(S.Discount *100 + "%");
+                Disc.Text = Convert.ToString(S.Discount * 100 + "%");
                 //  i++;
             }
-
         }
 
 
-
+        //Редактировать
         Service S1;
         private void BReg_Click(object sender, RoutedEventArgs e)
         {
@@ -181,7 +188,7 @@ namespace LanguageSchool
             S1.Title = TBRTitle.Text;
             S1.Cost = Convert.ToDecimal(TBRCost.Text);
             S1.DurationInSeconds = Convert.ToInt32(TBDurationInSeconds.Text);
-            S1.Discount = Convert.ToInt32(TBDiscount.Text);
+            S1.Discount = Convert.ToDouble(TBDiscount.Text);
             S1.Description = TBDescription.Text;
             S1.MainImagePath = TBRImage.Text;
             Base.mE.SaveChanges();
@@ -214,13 +221,14 @@ namespace LanguageSchool
             AddNote.Visibility = Visibility.Visible;
         }
 
+        //Добавить услугу
         private void BAddNote_Click(object sender, RoutedEventArgs e)
         {
             Service S = new Service();
             S.Title = TBATitle.Text;
             S.Cost = Convert.ToInt32(TBACost.Text);
             S.DurationInSeconds = Convert.ToInt32(TBADurationInSeconds.Text);
-            S.Discount = Convert.ToInt32(TBADiscount.Text);
+            S.Discount = Convert.ToDouble(TBADiscount.Text);
             S.Description = TBADescription.Text;
             S.MainImagePath = TBARImage.Text;
 
@@ -244,6 +252,7 @@ namespace LanguageSchool
             TBARImage.Text = path;
         }
 
+        //Добавить заказ
         private void BAddOrder_Click(object sender, RoutedEventArgs e)
         {
             MSP.Visibility = Visibility.Collapsed;
@@ -253,7 +262,7 @@ namespace LanguageSchool
             int ind = Int32.Parse(BEdit.Uid);
             S1 = ServiswList[ind];
             TBAddOrderTitle.Text = Convert.ToString(S1.Title);
-            TBAddOrderDuration.Text = Convert.ToString(S1.DurationInSeconds/60 + " минут");
+            TBAddOrderDuration.Text = Convert.ToString(S1.DurationInSeconds / 60 + " минут");
         }
         private void BAddOrderBack_Click(object sender, RoutedEventArgs e)
         {
@@ -265,7 +274,7 @@ namespace LanguageSchool
         DateTime DT;
         private void TBTime_TextChanged(object sender, TextChangedEventArgs e)
         {
-           
+
             {
                 Regex r1 = new Regex("[0-1][0-9][0-5][0-9]");
                 Regex r2 = new Regex("2[0-3]:[0-5][0-9]");
@@ -311,6 +320,89 @@ namespace LanguageSchool
             Base.mE.ClientService.Add(obj);
             Base.mE.SaveChanges();
             MessageBox.Show("Запись добавлена");
+        }
+
+        //Сортиковка по возрастанию и убыванию
+        private void SortUp_Click(object sender, RoutedEventArgs e)
+        {
+            i = -1;
+            ServiswList.Sort((x, y) => x.Cost.CompareTo(y.Cost));
+            DGServises.Items.Refresh();
+        }
+
+        private void SortDown_Click(object sender, RoutedEventArgs e)
+        {
+            i = -1;
+            ServiswList.Sort((x, y) => x.Cost.CompareTo(y.Cost));
+            ServiswList.Reverse();
+            DGServises.Items.Refresh();
+        }
+
+        //Сортиковка по процентам
+        List<Service> ServiseListFilter = new List<Service>();
+        private void CBFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            i = -1;
+            switch (CBFilter.SelectedIndex)
+            {
+                case 0:
+                    ServiseListFilter = ServiswList.Where(x => x.Discount < 0.05).ToList();
+                    ServiswList = ServiseListFilter;
+                    DGServises.ItemsSource = ServiswList;
+                    break;
+                case 1:
+                    ServiseListFilter = ServiswList.Where(x => x.Discount > 0.05 && x.Discount < 0.15).ToList();
+                    ServiswList = ServiseListFilter;
+                    DGServises.ItemsSource = ServiswList;
+                    break;
+                case 2:
+                    ServiseListFilter = ServiswList.Where(x => x.Discount > 0.15 && x.Discount < 0.30).ToList();
+                    ServiswList = ServiseListFilter;
+                    DGServises.ItemsSource = ServiswList;
+                    break;
+                case 3:
+                    ServiseListFilter = ServiswList.Where(x => x.Discount > 0.30 && x.Discount < 0.70).ToList();
+                    ServiswList = ServiseListFilter;
+                    DGServises.ItemsSource = ServiswList;
+                    break;
+                case 4:
+                    ServiseListFilter = ServiswList.Where(x => x.Discount > 0.70 && x.Discount < 1).ToList();
+                    ServiswList = ServiseListFilter;
+                    DGServises.ItemsSource = ServiswList;
+                    break;
+                case 5:
+                    ServiseListFilter = ServiswList.Where(x => x.Discount > 0 && x.Discount < 1).ToList();
+                    ServiswList = ServiswList1;
+                    DGServises.ItemsSource = ServiswList;
+                    break;
+            }
+        }
+
+        //Поиск
+        private void TBPoisk_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            i = -1;
+            if (TBPoisk.Text != "")
+            {
+                List<Service> ServiseListPoisk = new List<Service>();
+                ServiseListPoisk = ServiswList.Where(x => x.Title.Contains(TBPoisk.Text)).ToList();
+                ServiswList = ServiseListPoisk;
+                DGServises.ItemsSource = ServiswList;
+            }
+            else
+            {
+                if (ServiseListFilter.Count == 0)
+                {
+                    ServiswList = ServiswList1;
+                    DGServises.ItemsSource = ServiswList;
+                }
+                else
+                {
+                    ServiswList = ServiseListFilter;
+                    DGServises.ItemsSource = ServiswList;
+                }
+
+            }
         }
     }
 }
